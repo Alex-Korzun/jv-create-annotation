@@ -1,12 +1,13 @@
 package core.basesyntax;
 
-import core.basesyntax.controller.ConsoleHandler;
+import core.basesyntax.controller.BetConsoleHandler;
+import core.basesyntax.controller.GamblerConsoleHandler;
 
 public class Main {
     public static void main(String[] args) {
-        ConsoleHandler handler = new ConsoleHandler();
-        System.out.println("Print 'value, risk' for your bet."
-                + "For quit type 'quit'.");
-        handler.handle();
+        BetConsoleHandler betConsoleHandler = new BetConsoleHandler();
+        betConsoleHandler.handle();
+        GamblerConsoleHandler gamblerConsoleHandler = new GamblerConsoleHandler();
+        gamblerConsoleHandler.handle();
     }
 }

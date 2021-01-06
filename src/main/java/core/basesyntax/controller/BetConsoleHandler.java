@@ -5,10 +5,12 @@ import core.basesyntax.dao.BetDaoImpl;
 import core.basesyntax.model.Bet;
 import java.util.Scanner;
 
-public class ConsoleHandler {
+public class BetConsoleHandler {
     BetDao betDao = new BetDaoImpl();
 
     public void handle() {
+        System.out.println("Print 'value, risk' for your bet."
+                + "For quit type 'quit'.");
         Scanner scanner = new Scanner(System.in);
         while (true) {
             String command = scanner.nextLine();
@@ -17,16 +19,20 @@ public class ConsoleHandler {
             }
             Bet bet = null;
             try {
-                String[] betData = command.split(", ");
-                int value = Integer.parseInt(betData[0]);
-                double risk = Double.parseDouble(betData[1]);
-                bet = new Bet(value, risk);
+                try {
+                    String[] betData = command.split(", ");
+                    int value = Integer.parseInt(betData[0]);
+                    double risk = Double.parseDouble(betData[1]);
+                    bet = new Bet(value, risk);
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    System.out.println("There should be two parameters!");;
+                }
             } catch (NumberFormatException e) {
                 System.out.println("Wrong number format."
                         + "Please put correct values.");
             }
             betDao.add(bet);
-            System.out.println(bet == null ? null
+            System.out.println(bet == null ? "Missing values."
                     : bet.toString());
         }
     }
