@@ -1,16 +1,17 @@
 package core.basesyntax.controller;
 
 import core.basesyntax.dao.BetDao;
-import core.basesyntax.dao.BetDaoImpl;
 import core.basesyntax.dao.GamblerDao;
-import core.basesyntax.dao.GamblerDaoImpl;
+import core.basesyntax.lib.Inject;
 import core.basesyntax.model.Bet;
 import core.basesyntax.model.Gambler;
 import java.util.Scanner;
 
 public class ConsoleHandler {
-    private final BetDao betDao = new BetDaoImpl();
-    private final GamblerDao gamblerDao = new GamblerDaoImpl();
+    @Inject
+    private BetDao betDao;
+    @Inject
+    private GamblerDao gamblerDao;
 
     public void handle() {
         System.out.println("Print 'value, risk, name, age' for your bet."
