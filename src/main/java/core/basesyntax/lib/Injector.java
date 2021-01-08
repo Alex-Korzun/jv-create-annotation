@@ -1,10 +1,9 @@
 package core.basesyntax.lib;
 
-import core.basesyntax.exception.NoSuchAnnotationException;
 import core.basesyntax.dao.BetDao;
 import core.basesyntax.dao.GamblerDao;
+import core.basesyntax.exception.NoSuchAnnotationException;
 import core.basesyntax.factory.Factory;
-
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
