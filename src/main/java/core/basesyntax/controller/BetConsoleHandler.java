@@ -2,14 +2,18 @@ package core.basesyntax.controller;
 
 import core.basesyntax.dao.BetDao;
 import core.basesyntax.dao.BetDaoImpl;
+import core.basesyntax.dao.GamblerDao;
+import core.basesyntax.dao.GamblerDaoImpl;
 import core.basesyntax.model.Bet;
+import core.basesyntax.model.Gambler;
 import java.util.Scanner;
 
 public class BetConsoleHandler {
-    BetDao betDao = new BetDaoImpl();
+    private static final BetDao betDao = new BetDaoImpl();
+    private static final GamblerDao gamblerDao = new GamblerDaoImpl();
 
     public void handle() {
-        System.out.println("Print 'value, risk' for your bet."
+        System.out.println("Print 'value, risk, name, age' for your bet."
                 + "For quit type 'quit'.");
         Scanner scanner = new Scanner(System.in);
         while (true) {
@@ -18,22 +22,27 @@ public class BetConsoleHandler {
                 return;
             }
             Bet bet = null;
+            Gambler gambler = null;
             try {
-                try {
-                    String[] betData = command.split(", ");
-                    int value = Integer.parseInt(betData[0]);
-                    double risk = Double.parseDouble(betData[1]);
-                    bet = new Bet(value, risk);
-                } catch (ArrayIndexOutOfBoundsException e) {
-                    System.out.println("There should be two parameters!");;
-                }
+                String[] betData = command.split(", ");
+                int value = Integer.parseInt(betData[0]);
+                double risk = Double.parseDouble(betData[1]);
+                String name = betData[2];
+                int gamblerAge = Integer.parseInt(betData[3]);
+                bet = new Bet(value, risk);
+                gambler = new Gambler(name, gamblerAge);
+            } catch (ArrayIndexOutOfBoundsException e) {
+                System.out.println("There should be four parameters!");;
             } catch (NumberFormatException e) {
-                System.out.println("Wrong number format."
+                System.out.println("Wrong format."
                         + "Please put correct values.");
             }
-            betDao.add(bet);
+            if (bet != null && gambler != null) {
+                betDao.add(bet);
+                gamblerDao.add(gambler);
+            }
             System.out.println(bet == null ? "Missing values."
-                    : bet.toString());
+                    : bet.toString() + " " + gambler.toString());
         }
     }
 }
