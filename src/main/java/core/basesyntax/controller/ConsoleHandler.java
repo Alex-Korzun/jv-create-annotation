@@ -8,9 +8,9 @@ import core.basesyntax.model.Bet;
 import core.basesyntax.model.Gambler;
 import java.util.Scanner;
 
-public class BetConsoleHandler {
-    private static final BetDao betDao = new BetDaoImpl();
-    private static final GamblerDao gamblerDao = new GamblerDaoImpl();
+public class ConsoleHandler {
+    private final BetDao betDao = new BetDaoImpl();
+    private final GamblerDao gamblerDao = new GamblerDaoImpl();
 
     public void handle() {
         System.out.println("Print 'value, risk, name, age' for your bet."
@@ -41,7 +41,8 @@ public class BetConsoleHandler {
                 betDao.add(bet);
                 gamblerDao.add(gambler);
             }
-            System.out.println(bet == null ? "Missing values."
+            System.out.println(bet == null
+                    || gambler == null ? "Missing values."
                     : bet.toString() + " " + gambler.toString());
         }
     }

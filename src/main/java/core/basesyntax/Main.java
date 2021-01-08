@@ -1,10 +1,10 @@
 package core.basesyntax;
 
-import core.basesyntax.controller.BetConsoleHandler;
+import core.basesyntax.controller.ConsoleHandler;
 
 public class Main {
     public static void main(String[] args) {
-        BetConsoleHandler betConsoleHandler = new BetConsoleHandler();
+        ConsoleHandler betConsoleHandler = new ConsoleHandler();
         betConsoleHandler.handle();
     }
 }
